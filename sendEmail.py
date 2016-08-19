@@ -13,7 +13,7 @@ from os.path import expanduser,basename
 #Global Variables
 
 HOME = expanduser("~")
-RPTDIR = HOME+"/reports"
+RPTDIR = HOME+"/samples/reports"
 ARCH = HOME+"/samples/archive"
 
 def doEmail(FILE):
