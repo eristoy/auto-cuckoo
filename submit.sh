@@ -1,8 +1,9 @@
 #!/bin/bash
-#Script to monitor drop folder for incoming malware analysis jobs. 
-#Ver .01 Eric Stoycon eastoycon@novanthealh.org
+#Script to monitor drop folder for incoming malware analysis jobs.
+#Ver .01 Eric Stoycon estoycon@gmail.com
 ####Var Section
-CUDIR=$HOME/install/cuckoo
+CUDIR=$HOME/cuckoo
+INC=$HOME/samples
 CULOG=$CUDIR/log/cuckoo.log
 WORKING=$HOME/working
 STORAGE=$CUDIR/storage/analyses
@@ -29,7 +30,7 @@ autoCUCKOO()
             RET=`$SUBMIT --url $URL`
         else
             RET=`$SUBMIT "$s"`
-            
+
         fi
         ID=$(echo $RET | awk '{print $9}')
         #echo "ID is $ID"
@@ -47,8 +48,8 @@ autoCUCKOO()
                 #echo "Sleeping"
                 sleep 30
             fi
-        done 
-        mv $s $DONE 
+        done
+        mv $s $DONE
     done
 }
 

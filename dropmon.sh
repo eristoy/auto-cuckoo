@@ -1,14 +1,12 @@
 #!/bin/bash
-#Script to monitor drop folder for incoming malware analysis jobs. 
-#Ver .01 Eric Stoycon eastoycon@novanthealh.org
+#Script to monitor drop folder for incoming malware analysis jobs.
+#Ver .01 Eric Stoycon estoycon@gmail.com
 ####Var Section
-DROP=$HOME/drop
-WORKING=$HOME/working
-ARCH=$HOME/archive
-RPT=$CUDIR/reports
+INC=$HOME/samples
+DROP=$INC/drop
+WORKING=$INC/working
 
-
-
+#Functions
 checkforFiles()
 {
 #Check if there are any files awaiting to be processed
@@ -38,8 +36,8 @@ removeSpaces()
         mv "${z}" "${z// /_}"
     done
 }
-    
-checkforFiles
+
+checkforFiles()
 if [ $OK -eq 1 ]; then
     moveFiles
     if [ $? -eq 0 ]; then
@@ -50,5 +48,5 @@ if [ $OK -eq 1 ]; then
 else
     echo "No files to move"
 fi
-moveFiles
-removeSpaces
+#Main
+checkforFiles

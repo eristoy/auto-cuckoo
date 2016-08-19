@@ -1,4 +1,8 @@
 #!/usr/bin/python
+#Simple send email script to compress and email cuckoo reports
+#By Eric Stoycon, estoycon@gmail.com
+#
+
 import sys,smtplib,os,zipfile,mimetypes
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -6,10 +10,11 @@ from email.MIMEBase import MIMEBase
 from email import encoders
 from os.path import expanduser,basename
 
-#Check if there are reports to send out
+#Global Variables
+
 HOME = expanduser("~")
 RPTDIR = HOME+"/reports"
-ARCH = HOME+"/archive"
+ARCH = HOME+"/samples/archive"
 
 def doEmail(FILE):
     #Compress Report
@@ -21,9 +26,9 @@ def doEmail(FILE):
     zf.close()
     #print "Full File Name is %s" %(FNAME)
     #Build email
-    TO='NHCIRC@novanthealth.org'
-    CC='eastoycon@novanthealth.org'
-    FROM='CUCKOO-Sandbox@novanthealth.org'
+    TO='who@where'
+    CC='who@where'
+    FROM='CUCKOO-Sandbox@whatever'
     SBJ = 'CUCKOO Analysis Results for %s' %(FILE)
     mailSRV = 'localhost'
     msg = MIMEMultipart()
@@ -60,15 +65,13 @@ def doEmail(FILE):
     os.remove(FPATH)
     server.quit()
 
-
+#Main
 if __name__=="__main__":
 
     if os.listdir(RPTDIR) != []:
-        print "has stuff"
+        #print "has stuff"
         for FILE in os.listdir(RPTDIR):
             doEmail(FILE)
     else:
-        print "no sutff"
+        #print "no sutff"
         foo="true"
-
-
